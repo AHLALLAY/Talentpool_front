@@ -23,7 +23,6 @@ export default function Login() {
                 body: JSON.stringify({ email, password })
             });
 
-            console.log(response)
             const data = await response.json();
             if (!response.ok) throw new Error(data.message || 'Erreur de connexion');
 
