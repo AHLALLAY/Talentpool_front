@@ -29,7 +29,7 @@ export default function Login() {
             localStorage.setItem('token', data.data.token);
             localStorage.setItem('user', JSON.stringify(data.data.user));
 
-            navigate('/' + data.data.user.roles);
+            navigate('/' + data.data.user.roles + 'dashboard.jsx');
 
         } catch (err) {
             setError(err.message);
