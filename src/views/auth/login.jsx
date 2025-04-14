@@ -6,7 +6,7 @@ export default function Login() {
     const navigate = useNavigate();
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
-    const [pwd, setPassword] = useState('');
+    const [password, setPassword] = useState('');
 
     const handelClose = () => {
         navigate('/');
@@ -20,7 +20,7 @@ export default function Login() {
             const response = await fetch('http://127.0.0.1:8000/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, pwd })
+                body: JSON.stringify({ email, password })
             });
 
             console.log(response)
@@ -78,7 +78,7 @@ export default function Login() {
                         <label htmlFor="pwd" className="block text-cyan-200 mb-1">
                             Mot de passe <span className="text-pink-400 font-bold">*</span>
                         </label>
-                        <input type="password" id="pwd" name="pwd" value={pwd} onChange={(e) => setPassword(e.target.value)}
+                        <input type="password" id="pwd" name="pwd" value={password} onChange={(e) => setPassword(e.target.value)}
                             className="w-full px-4 py-2 rounded-md bg-gray-800 border border-cyan-500 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
                             placeholder="********" required />
                     </div>
