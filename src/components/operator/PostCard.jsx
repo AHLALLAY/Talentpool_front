@@ -26,7 +26,6 @@ export default function PostCard() {
             if (!response.ok) throw new Error('Erreur lors de la récupération des données');
 
             const data = await response.json();
-            console.log('Données récupérées :', data);
             setPosts(data.data);
         } catch (err) {
             setError(err.message);

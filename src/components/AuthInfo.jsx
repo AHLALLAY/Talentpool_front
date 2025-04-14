@@ -8,7 +8,6 @@ export default function Authinfo() {
             const UserInfo = JSON.parse(localStorage.getItem('user'));
             if (UserInfo && UserInfo.name) {
                 setUser(UserInfo);
-                console.log("Nom utilisateur :", UserInfo.name);
             }
         } catch (error) {
             console.error("Erreur lors de la lecture de l'utilisateur depuis le localStorage :", error);
