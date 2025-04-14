@@ -15,9 +15,9 @@ export default function Authinfo() {
     }, []);
 
     return (
-        <div className="p-4">
-            <label className="text-gray-700 text-lg font-semibold">Welcome</label>{" "}
-            <span className="text-xl font-bold text-cyan-600 mt-2">
+        <div className="p-4 border-b border-cyan-500/30 mb-4">
+            <label className="text-cyan-200 text-lg font-semibold">Welcome</label>{" "}
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
                 {user.name}
             </span>
         </div>
