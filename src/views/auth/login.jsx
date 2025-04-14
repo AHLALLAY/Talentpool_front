@@ -12,26 +12,27 @@ export default function Login() {
         navigate('/');
     };
 
-    const handelSubmit = async(e) => {
+    const handelSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        
-        try{
+
+        try {
             const response = await fetch('http://127.0.0.1:8000/api/login', {
-                method:'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email,pwd})
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, pwd })
             });
 
-            const data  =await response.json();
+            console.log(response)
+            const data = await response.json();
             if (!response.ok) throw new Error(data.message || 'Erreur de connexion');
 
             localStorage.setItem('token', data.data.token);
             localStorage.setItem('user', JSON.stringify(data.data.user));
 
-            navigate('/'+data.data.user.roles);
-            
-        }catch(err){
+            navigate('/' + data.data.user.roles);
+
+        } catch (err) {
             setError(err.message);
         }
     };
@@ -39,8 +40,8 @@ export default function Login() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center px-4">
-            <form onSubmit={handelSubmit} 
-            className="bg-gray-950 bg-opacity-90 border border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.3)] backdrop-blur-md rounded-xl p-8 w-full max-w-md text-white">
+            <form onSubmit={handelSubmit}
+                className="bg-gray-950 bg-opacity-90 border border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.3)] backdrop-blur-md rounded-xl p-8 w-full max-w-md text-white">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-3xl font-bold text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.6)]">
@@ -57,13 +58,11 @@ export default function Login() {
                 </div>
 
                 {/* afficher les message d'erreur */}
-                {
-                    error && (
-                        <div className="mb-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
-                            {error}
-                        </div>
-                    )
-                };
+                {error && (
+                    <div className="mb-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
+                        {error}
+                    </div>
+                )}
 
                 {/* Champs */}
                 <div className="space-y-4">
