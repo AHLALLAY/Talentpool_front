@@ -4,13 +4,27 @@ export default function PostCard() {
     const [error, setError] = useState('');
     const [posts, setPosts] = useState([]);
 
+
     const handleData = async () => {
+        let operatorId = null;
+
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/posts/operator/6', {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user && user.id) {
+                operatorId = user.id;
+            }
+        } catch (error) {
+            console.error("Erreur lors de la lecture de l'utilisateur depuis le localStorage :", error);
+        }
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/posts/operator/${operatorId}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             });
+
             if (!response.ok) throw new Error('Erreur lors de la récupération des données');
+
             const data = await response.json();
             console.log('Données récupérées :', data);
             setPosts(data.data);
@@ -18,6 +32,7 @@ export default function PostCard() {
             setError(err.message);
         }
     };
+
 
     useEffect(() => {
         handleData();
