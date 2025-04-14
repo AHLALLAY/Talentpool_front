@@ -24,6 +24,7 @@ export default function NavBarOpearator() {
                         <span className="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></span>
                     </button>
                 </div>
+                {/* menu humbarger */}
                 <button className="md:hidden text-cyan-400 hover:text-white transition-colors duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
