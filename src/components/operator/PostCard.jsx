@@ -68,7 +68,7 @@ export default function PostCard() {
                 ))
             ) : (
                 <div className="col-span-full text-center text-gray-600 font-medium">
-                    Chargement des données...
+                    Vous n'avez pas encore annoncer quelque chose
                 </div>
             )}
         </section>
