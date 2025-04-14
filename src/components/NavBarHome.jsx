@@ -8,13 +8,16 @@ export default function NavBarHome() {
                     </span>
                 </div>
                 <div className="hidden md:flex items-center space-x-6">
-                    <a href="#" className="text-cyan-300 hover:text-white font-medium text-lg drop-shadow-[0_0_5px_rgba(34,211,238,0.8)] transition-all duration-300 hover:scale-105">
+                    <button
+                        onClick={() => window.location.href = '/login'}
+                        className="text-cyan-300 hover:text-white font-medium text-lg drop-shadow-[0_0_5px_rgba(34,211,238,0.8)] transition-all duration-300 hover:scale-105"
+                    >
                         Se connecter
-                    </a>
-                    <a href="#" className="relative bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-2.5 rounded-lg font-medium shadow-[0_0_15px_rgba(6,182,212,0.7)] hover:shadow-[0_0_25px_rgba(6,182,212,0.9)] transition-all duration-500 hover:from-cyan-600 hover:to-blue-600 group overflow-hidden">
+                    </button>
+                    <button href="#" className="relative bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-2.5 rounded-lg font-medium shadow-[0_0_15px_rgba(6,182,212,0.7)] hover:shadow-[0_0_25px_rgba(6,182,212,0.9)] transition-all duration-500 hover:from-cyan-600 hover:to-blue-600 group overflow-hidden">
                         <span className="relative z-10">S'inscrire</span>
                         <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></span>
-                    </a>
+                    </button>
                 </div>
                 <button className="md:hidden text-cyan-400 hover:text-white transition-colors duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
