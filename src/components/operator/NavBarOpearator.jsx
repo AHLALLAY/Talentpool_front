@@ -1,4 +1,12 @@
 export default function NavBarOpearator() {
+    const handleLogout = () => {
+        if (window.confirm("Voulez-vous vraiment vous déconnecter ?")) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+        }
+    };
+
     return (
         <nav className="bg-gray-900/80 backdrop-blur-sm shadow-lg py-3 px-6 fixed w-full top-0 z-50 border-b border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.5)]">
             <div className="container mx-auto flex justify-between items-center w-full">
@@ -9,15 +17,11 @@ export default function NavBarOpearator() {
                 </div>
                 <div className="hidden md:flex items-center space-x-6">
                     <button
-                        onClick={() => {
-                            localStorage.removeItem('token');
-                            localStorage.removeItem('user');
-                            window.location.href = '/login';
-                        }}
-                        className="relative bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-2.5 rounded-lg font-medium shadow-[0_0_15px_rgba(6,182,212,0.7)] hover:shadow-[0_0_25px_rgba(6,182,212,0.9)] transition-all duration-500 hover:from-cyan-600 hover:to-blue-600 group overflow-hidden"
+                        onClick={handleLogout}
+                        className="relative bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2.5 rounded-lg font-medium shadow-[0_0_15px_rgba(255,0,0,0.7)] hover:shadow-[0_0_25px_rgba(255,0,0,0.9)] transition-all duration-500 hover:from-red-600 hover:to-red-700 group overflow-hidden"
                     >
                         <span className="relative z-10">Déconnexion</span>
-                        <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></span>
+                        <span className="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></span>
                     </button>
                 </div>
                 <button className="md:hidden text-cyan-400 hover:text-white transition-colors duration-300">
