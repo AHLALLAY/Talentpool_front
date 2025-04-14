@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
 export default function Authinfo() {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState('');
 
     useEffect(() => {
         try {
-            const user = JSON.parse(localStorage.getItem('user'));
-            if (user && user.name) {
-                setUser(user);
-                console.log("Nom utilisateur :", user.name);
+            const UserInfo = JSON.parse(localStorage.getItem('user'));
+            if (UserInfo && UserInfo.name) {
+                setUser(UserInfo);
+                console.log("Nom utilisateur :", UserInfo.name);
             }
         } catch (error) {
             console.error("Erreur lors de la lecture de l'utilisateur depuis le localStorage :", error);
