@@ -72,27 +72,24 @@ export default function Dashboard() {
             {/* Contenu principal (flex container) */}
             <div className="flex flex-1 pt-16"> {/* pt-16 pour compenser la NavBar */}
                 {/* Aside fixe (sidebar) */}
-                <aside className="sticky top-16 h-[calc(100vh-4rem)] w-64 bg-gray-800/80 border-r border-cyan-500/30 p-4 flex flex-col backdrop-blur-sm">
+                <aside className="sticky top-16 h-[calc(100vh-4rem)] w-64 bg-gray-900 border-r border-purple-500/40 p-4 flex flex-col backdrop-blur-sm">
                     <Authinfo />
                     <div className="space-y-3 mt-4">
                         <button
                             onClick={openModal}
-                            className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-2 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                            className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white py-2 px-4 rounded-lg hover:from-purple-500 hover:to-cyan-500 transition-all shadow-[0_0_15px_rgba(147,51,234,0.4)]"
                         >
                             Ajouter Annonce
                         </button>
-                        <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all shadow-[0_0_15px_rgba(219,39,119,0.4)]">
+                        <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">
                             Voir les statistiques
                         </button>
                     </div>
                 </aside>
 
-                {/* Main content (zone scrollable) */}
-                <main className="flex-1 p-6 overflow-y-auto bg-gradient-to-b from-blue-800/20 via-cyan-800/20 to-purple-900/20">
-                    {/* Effets de fond */}
-                    <div className="fixed -top-40 -left-40 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl opacity-30 animate-pulse -z-10"></div>
-                    <div className="fixed -bottom-32 -right-40 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl opacity-30 animate-pulse delay-200 -z-10"></div>
-
+                <main className="flex-1 p-6 overflow-y-auto bg-gradient-to-br from-purple-900 via-cyan-900 to-blue-900 relative">
+                    {/* Overlay pour renforcer l'effet néon */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-purple-500/90 via-cyan-300/80 to-blue-600/80 backdrop-filter backdrop-blur-sm"></div>
                     {/* Contenu scrollable */}
                     <div className="relative z-10">
                         <PostCard />
@@ -100,75 +97,74 @@ export default function Dashboard() {
                 </main>
             </div>
 
-
             {/* Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 backdrop-blur-sm">
-                    <div className="relative bg-gray-800 border border-cyan-500/30 p-6 rounded-xl shadow-lg max-w-md w-full backdrop-blur-md">
+                <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 backdrop-blur-sm">
+                    <div className="relative bg-gray-900 border border-purple-500/40 p-6 rounded-xl shadow-lg max-w-md w-full">
                         {/* Effets de lueur */}
-                        <div className="absolute -top-20 -left-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-2xl opacity-20 z-0"></div>
-                        <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-2xl opacity-20 z-0"></div>
+                        <div className="absolute -top-20 -left-20 w-64 h-64 bg-purple-500/20 rounded-full blur-2xl opacity-40 z-0"></div>
+                        <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-cyan-500/20 rounded-full blur-2xl opacity-40 z-0"></div>
 
                         <div className="relative z-10">
                             <button
                                 onClick={closeModal}
-                                className="absolute top-2 right-3 text-cyan-300 hover:text-white text-2xl font-bold transition-colors"
+                                className="absolute top-2 right-3 text-cyan-400 hover:text-white text-2xl font-bold transition-colors"
                             >
                                 &times;
                             </button>
 
-                            <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                            <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400">
                                 Ajouter une annonce
                             </h2>
 
                             {error && (
-                                <p className="text-red-400 mb-4 p-2 bg-red-900/30 rounded-lg border border-red-500/30">
+                                <p className="text-red-400 mb-4 p-2 bg-red-900/30 rounded-lg border border-red-500/40">
                                     {error}
                                 </p>
                             )}
 
                             <form onSubmit={handleSubmit} className="space-y-5">
                                 <div>
-                                    <label className="block text-sm font-medium text-cyan-200 mb-1">
+                                    <label className="block text-sm font-medium text-purple-300 mb-1">
                                         Titre <span className="text-red-400">*</span>
                                     </label>
                                     <input
                                         type="text"
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
-                                        className="mt-1 block w-full bg-gray-700/50 border border-cyan-500/30 text-white rounded-lg p-3 focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none transition-all"
+                                        className="mt-1 block w-full bg-gray-800/50 border border-purple-500/40 text-white rounded-lg p-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
                                         required
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-cyan-200 mb-1">
+                                    <label className="block text-sm font-medium text-cyan-300 mb-1">
                                         Description <span className="text-red-400">*</span>
                                     </label>
                                     <textarea
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
-                                        className="mt-1 block w-full bg-gray-700/50 border border-cyan-500/30 text-white rounded-lg p-3 h-24 focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none transition-all"
+                                        className="mt-1 block w-full bg-gray-800/50 border border-cyan-500/40 text-white rounded-lg p-3 h-24 focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none transition-all"
                                         required
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-cyan-200 mb-1">
+                                    <label className="block text-sm font-medium text-blue-300 mb-1">
                                         Date d'expiration <span className="text-red-400">*</span>
                                     </label>
                                     <input
                                         type="date"
                                         value={expiredDate}
                                         onChange={(e) => setExpiredDate(e.target.value)}
-                                        className="mt-1 block w-full bg-gray-700/50 border border-cyan-500/30 text-white rounded-lg p-3 [&::-webkit-calendar-picker-indicator]:filter-invert focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none transition-all"
+                                        className="mt-1 block w-full bg-gray-800/50 border border-blue-500/40 text-white rounded-lg p-3 [&::-webkit-calendar-picker-indicator]:filter-invert focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                                         required
                                     />
                                 </div>
 
                                 <button
                                     type="submit"
-                                    className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 px-4 rounded-lg shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300"
+                                    className="w-full bg-gradient-to-r from-purple-600 via-cyan-600 to-blue-600 hover:from-purple-500 hover:via-cyan-500 hover:to-blue-500 text-white font-bold py-3 px-4 rounded-lg shadow-[0_0_15px_rgba(147,51,234,0.3)] hover:shadow-[0_0_20px_rgba(147,51,234,0.5)] transition-all duration-300"
                                 >
                                     Publier
                                 </button>
