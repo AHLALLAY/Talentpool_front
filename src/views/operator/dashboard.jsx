@@ -81,7 +81,7 @@ export default function Dashboard() {
                         >
                             Ajouter Annonce
                         </button>
-                        <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+                        <button onClick={()=>window.location.href = '/statistics'} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">
                             Voir les statistiques
                         </button>
                     </div>
