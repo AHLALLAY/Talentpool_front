@@ -14,17 +14,30 @@ export default function Dashboard() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [expiredDate, setExpiredDate] = useState('');
+    const [posts, setPosts] = useState([]);
+
+
+    const fetchPosts = async (operatorId) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/posts/operator/${operatorId}`);
+            const data = await response.json();
+            setPosts(data.data);
+        } catch (err) {
+            console.error("Erreur lors de la récupération des annonces :", err);
+        }
+    };
 
     useEffect(() => {
         try {
             const storedUser = JSON.parse(localStorage.getItem('user'));
             if (storedUser && storedUser.id) {
                 setUser(storedUser);
+                fetchPosts(storedUser.id);
             }
         } catch (err) {
             console.error("Erreur lors du chargement de l'utilisateur :", err);
         }
-    }, []);
+    }, []);    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -53,10 +66,13 @@ export default function Dashboard() {
             }
 
             alert("Annonce ajoutée avec succès !");
+            
             setTitle('');
             setDescription('');
             setExpiredDate('');
-            closeModal(); // Fermer le modal après ajout
+            closeModal();
+
+            await fetchPosts(user.id);
         } catch (err) {
             setError(err.message);
         }
@@ -81,7 +97,7 @@ export default function Dashboard() {
                         >
                             Ajouter Annonce
                         </button>
-                        <button onClick={()=>window.location.href = '/statistics'} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+                        <button onClick={() => window.location.href = '/statistics'} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">
                             Voir les statistiques
                         </button>
                     </div>
@@ -92,7 +108,7 @@ export default function Dashboard() {
                     <div className="absolute inset-0 bg-gradient-to-b from-purple-500/90 via-cyan-300/80 to-blue-600/80 backdrop-filter backdrop-blur-sm"></div>
                     {/* Contenu scrollable */}
                     <div className="relative z-10">
-                        <PostCard />
+                        <PostCard posts={posts} />
                     </div>
                 </main>
             </div>
