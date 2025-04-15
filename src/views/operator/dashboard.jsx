@@ -88,7 +88,7 @@ export default function Dashboard() {
             {/* Contenu principal (flex container) */}
             <div className="flex flex-1 pt-16"> {/* pt-16 pour compenser la NavBar */}
                 {/* Aside fixe (sidebar) */}
-                <aside className="sticky top-16 h-[calc(100vh-4rem)] w-64 bg-gray-900 border-r border-purple-500/40 p-4 flex flex-col backdrop-blur-sm">
+                <aside className="sticky top-16 h-[calc(100vh-4rem)] w-64 bg-gray-900 border-r border-purple-500/40 p-4 flex flex-col backdrop-blur-sm hidden lg:flex">
                     <Authinfo />
                     <div className="space-y-3 mt-4">
                         <button

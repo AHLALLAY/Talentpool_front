@@ -1,7 +1,7 @@
-export default function PostCard({posts = []}) {
+export default function PostCard({ posts = [] }) {
 
     return (
-        <section className="mt-24 px-4 md:px-10 lg:px-20 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <section className="px-4 md:px-10 lg:px-20 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.length > 0 ? (
                 posts.map((post) => (
                     <div
@@ -37,6 +37,14 @@ export default function PostCard({posts = []}) {
                                 {post.description}
                             </p>
                         </div>
+                        <div className="mt-4 flex justify-end">
+                            <button
+                                className="px-4 py-2 text-sm font-medium rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-[0_0_10px_rgba(6,182,212,0.4)] hover:from-cyan-500 hover:to-blue-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-300"
+                            >
+                                Détail
+                            </button>
+                        </div>
+
                     </div>
                 ))
             ) : (

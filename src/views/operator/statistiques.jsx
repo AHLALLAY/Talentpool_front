@@ -58,7 +58,7 @@ export default function Statistics() {
             </div>
 
             <div className="flex flex-1 pt-16">
-                <aside className="sticky top-16 h-[calc(100vh-4rem)] w-64 bg-gray-900 border-r border-purple-500/40 p-4 flex flex-col backdrop-blur-sm">
+                <aside className="sticky top-16 h-[calc(100vh-4rem)] w-64 bg-gray-900 border-r border-purple-500/40 p-4 flex flex-col backdrop-blur-sm hidden lg:flex">
                     <Authinfo />
                     <div className="space-y-3 mt-4">
                         <button
@@ -79,7 +79,7 @@ export default function Statistics() {
 
                     <div className="relative z-10">
                         <h1 className="text-3xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400">
-                            Tableau de Bord des Statistiques
+                            Statistiques
                         </h1>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
