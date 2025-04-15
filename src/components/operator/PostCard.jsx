@@ -62,7 +62,7 @@ export default function PostCard() {
 
                         <div className="space-y-2 relative z-10">
                             <p className="text-sm">
-                                <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-cyan-200">Entreprise :</span>
+                                <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-cyan-200">éditeur :</span>
                                 <span className="text-cyan-100 ml-1">{post.operator_id}</span>
                             </p>
 

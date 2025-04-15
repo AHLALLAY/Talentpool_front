@@ -63,32 +63,41 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col w-full bg-gray-900 text-white overflow-hidden">
-            <NavBarOpearator />
-            <div className="relative flex-grow bg-gradient-to-b from-blue-800 via-purple-800 to-gray-900">
-                {/* Glow en arrière-plan */}
-                <div className="absolute -top-40 -left-40 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl opacity-30 animate-pulse z-0"></div>
-                <div className="absolute -bottom-32 -right-40 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl opacity-30 animate-pulse delay-200 z-0"></div>
+        <div className="min-h-screen flex flex-col bg-gray-900 text-white">
+            {/* NavBar fixe en haut */}
+            <div className="fixed top-0 left-0 right-0 z-20">
+                <NavBarOpearator />
+            </div>
 
-                {/* Contenu principal */}
-                <div className="relative z-10 flex h-screen pt-10">
-                    <aside className="w-64 bg-gray-800/80 text-white p-4 border-r border-cyan-500/30 flex flex-col justify-start h-full backdrop-blur-sm">
-                        <Authinfo />
+            {/* Contenu principal (flex container) */}
+            <div className="flex flex-1 pt-16"> {/* pt-16 pour compenser la NavBar */}
+                {/* Aside fixe (sidebar) */}
+                <aside className="sticky top-16 h-[calc(100vh-4rem)] w-64 bg-gray-800/80 border-r border-cyan-500/30 p-4 flex flex-col backdrop-blur-sm">
+                    <Authinfo />
+                    <div className="space-y-3 mt-4">
                         <button
                             onClick={openModal}
-                            className="mb-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-2 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                            className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-2 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all shadow-[0_0_15px_rgba(6,182,212,0.5)]"
                         >
                             Ajouter Annonce
                         </button>
-                        <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all shadow-[0_0_15px_rgba(219,39,119,0.4)]">
+                        <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all shadow-[0_0_15px_rgba(219,39,119,0.4)]">
                             Voir les statistiques
                         </button>
-                    </aside>
+                    </div>
+                </aside>
 
-                    <main className="flex-1 p-6 overflow-y-auto">
+                {/* Main content (zone scrollable) */}
+                <main className="flex-1 p-6 overflow-y-auto bg-gradient-to-b from-blue-800/20 via-cyan-800/20 to-purple-900/20">
+                    {/* Effets de fond */}
+                    <div className="fixed -top-40 -left-40 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl opacity-30 animate-pulse -z-10"></div>
+                    <div className="fixed -bottom-32 -right-40 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl opacity-30 animate-pulse delay-200 -z-10"></div>
+
+                    {/* Contenu scrollable */}
+                    <div className="relative z-10">
                         <PostCard />
-                    </main>
-                </div>
+                    </div>
+                </main>
             </div>
 
 
