@@ -4,6 +4,7 @@ import NavBarOpearator from "../../components/operator/NavBarOpearator";
 import PostCard from "../../components/operator/PostCard";
 
 export default function Dashboard() {
+    const [user, setUser] = useState('');
     const [error, setError] = useState('');
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -24,6 +25,7 @@ export default function Dashboard() {
     useEffect(() => {
         try {
             const user = JSON.parse(localStorage.getItem('user'));
+            setUser(user);
             if (user && user.id) {
                 fetchPosts(user.id);
             }
@@ -73,7 +75,7 @@ export default function Dashboard() {
                         ) : error ? (
                             <div className="text-center text-red-400 mt-12">{error}</div>
                         ) : (
-                            <PostCard posts={posts} />
+                            <PostCard posts={posts} user={user}/>
                         )}
                     </div>
                 </main>
