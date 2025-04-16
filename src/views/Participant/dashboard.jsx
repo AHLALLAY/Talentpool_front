@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Authinfo from "../../components/AuthInfo";
-import NavBarOpearator from "../../components/operator/NavBarOpearator";
+import NavBarOperator from "../../components/operator/NavBarOperator";
 import PostCard from "../../components/operator/PostCard";
 
 export default function Dashboard() {
@@ -40,7 +40,7 @@ export default function Dashboard() {
         <div className="min-h-screen flex flex-col bg-gray-900 text-white">
             {/* NavBar fixe en haut */}
             <div className="fixed top-0 left-0 right-0 z-20">
-                <NavBarOpearator />
+                <NavBarOperator />
             </div>
 
             {/* Contenu principal (flex container) */}
@@ -50,13 +50,7 @@ export default function Dashboard() {
                     <Authinfo />
                     <div className="space-y-3 mt-4">
                         <button
-                            onClick={() => window.location.href = '/dashboard'}
-                            className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white py-2 px-4 rounded-lg hover:from-purple-500 hover:to-cyan-500 transition-all shadow-[0_0_15px_rgba(147,51,234,0.4)]"
-                        >
-                            Dashboard
-                        </button>
-                        <button
-                            onClick={() => window.location.href = '/statistics'}
+                            onClick={() => window.location.href = '/participant'}
                             className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]"
                         >
                             Mes Postulations
