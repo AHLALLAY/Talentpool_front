@@ -1,13 +1,24 @@
+import { useNavigate } from 'react-router-dom';
+
 import NavBarAuth from "../../components/NavBarAuth";
 import Authinfo from "../../components/AuthInfo";
-import { useNavigate } from 'react-router-dom';
+import AppCard from "../../components/participant/appCard";
+import { useEffect, useState } from 'react';
 
 
 export default function Application() {
-
     const navigate = useNavigate();
-    
-    
+    const [user, setUser] = useState('');
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        try {
+            const userId = JSON.parse(localStorage.getItem('user'));
+            setUser(userId.id);
+        } catch (err) {
+            setError(err);
+        }
+    }, []);
     return (
         <div className="min-h-screen flex flex-col bg-gray-900 text-white">
             {/* NavBar fixe en haut */}
@@ -31,7 +42,8 @@ export default function Application() {
                 </aside>
 
                 <main className="flex-1 p-6 overflow-y-auto bg-gradient-to-br from-purple-900 via-cyan-900 to-blue-900 relative">
-
+                    <div>{error}</div>
+                    <AppCard participantId={user} />
                 </main>
             </div>
         </div>
