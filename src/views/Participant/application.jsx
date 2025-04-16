@@ -1,8 +1,12 @@
 import NavBarAuth from "../../components/NavBarAuth";
 import Authinfo from "../../components/AuthInfo";
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Application() {
+
+    const navigate = useNavigate();
+    
     
     return (
         <div className="min-h-screen flex flex-col bg-gray-900 text-white">
@@ -18,7 +22,7 @@ export default function Application() {
                     <Authinfo />
                     <div className="space-y-3 mt-4">
                         <button
-                            onClick={() => window.location.href = '/dashboard'}
+                            onClick={() => navigate('/dashboard')}
                             className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white py-2 px-4 rounded-lg hover:from-purple-500 hover:to-cyan-500 transition-all shadow-[0_0_15px_rgba(147,51,234,0.4)]"
                         >
                             Dashboard

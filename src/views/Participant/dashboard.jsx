@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import Authinfo from "../../components/AuthInfo";
 import NavBarAuth from "../../components/NavBarAuth";
 import PostCard from "../../components/operator/PostCard";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
     const [user, setUser] = useState('');
     const [error, setError] = useState('');
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     const fetchPosts = async () => {
         try {
@@ -50,7 +52,7 @@ export default function Dashboard() {
                     <Authinfo />
                     <div className="space-y-3 mt-4">
                         <button
-                            onClick={() => window.location.href = '/participant'}
+                            onClick={() => navigate('/application')}
                             className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]"
                         >
                             Mes Postulations
