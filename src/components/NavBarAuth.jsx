@@ -1,4 +1,4 @@
-export default function NavBarOperator() {
+export default function NavBarAuth() {
     const handleLogout = () => {
         if (window.confirm("Voulez-vous vraiment vous déconnecter ?")) {
             localStorage.removeItem('token');

@@ -1,4 +1,4 @@
-import NavBarOperator from "../../components/operator/NavBarOperator";
+import NavBarAuth from "../../components/NavBarAuth";
 import Authinfo from "../../components/AuthInfo";
 
 
@@ -8,7 +8,7 @@ export default function Application() {
         <div className="min-h-screen flex flex-col bg-gray-900 text-white">
             {/* NavBar fixe en haut */}
             <div className="fixed top-0 left-0 right-0 z-20">
-                <NavBarOperator />
+                <NavBarAuth />
             </div>
 
             {/* Contenu principal (flex container) */}
