@@ -8,6 +8,7 @@ import Register from './views/auth/register.jsx';
 import Operator from './views/operator/dashboard.jsx';
 import Statistics from './views/operator/statistiques.jsx';
 import Participant from './views/Participant/dashboard.jsx';
+import Application from './views/Participant/application.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/operator' element={<Operator />}/>
         <Route path='/statistics' element={<Statistics />}/>
         <Route path='/participant' element={<Participant />}/>
+        <Route path='/application' element={<Application />}/>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
