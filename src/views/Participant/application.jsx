@@ -22,7 +22,7 @@ export default function Application() {
                     <Authinfo />
                     <div className="space-y-3 mt-4">
                         <button
-                            onClick={() => navigate('/dashboard')}
+                            onClick={() => navigate('/participant')}
                             className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white py-2 px-4 rounded-lg hover:from-purple-500 hover:to-cyan-500 transition-all shadow-[0_0_15px_rgba(147,51,234,0.4)]"
                         >
                             Dashboard
