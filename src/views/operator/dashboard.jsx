@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Authinfo from "../../components/AuthInfo";
-import NavBarOpearator from "../../components/operator/NavBarOpearator";
+import NavBarOperator from "../../components/operator/NavBarOperator";
 import PostCard from "../../components/operator/PostCard";
 
 export default function Dashboard() {
@@ -82,7 +82,7 @@ export default function Dashboard() {
         <div className="min-h-screen flex flex-col bg-gray-900 text-white">
             {/* NavBar fixe en haut */}
             <div className="fixed top-0 left-0 right-0 z-20">
-                <NavBarOpearator />
+                <NavBarOperator />
             </div>
 
             {/* Contenu principal (flex container) */}

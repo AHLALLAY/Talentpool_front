@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Authinfo from "../../components/AuthInfo";
-import NavBarOpearator from "../../components/operator/NavBarOpearator";
+import NavBarOperator from "../../components/operator/NavBarOperator";
 
 export default function Statistics() {
     const [stats, setStats] = useState({
@@ -54,7 +54,7 @@ export default function Statistics() {
     return (
         <div className="min-h-screen flex flex-col bg-gray-900 text-white">
             <div className="fixed top-0 left-0 right-0 z-20">
-                <NavBarOpearator />
+                <NavBarOperator />
             </div>
 
             <div className="flex flex-1 pt-16">
