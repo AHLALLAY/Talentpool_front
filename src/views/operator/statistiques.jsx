@@ -11,6 +11,26 @@ export default function Statistics() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
 
+    const handleStatusChange = async (applicationId, newStatus) => {
+        try {
+          const res = await fetch(`http://127.0.0.1:8000/api/applications/${applicationId}/status`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: newStatus })
+          });
+      
+          if (!res.ok) throw new Error("Erreur lors de la mise à jour.");
+      
+          // Recharger les stats ou mettre à jour localement
+          alert("Statut mis à jour !");
+        } catch (error) {
+          alert("Erreur : " + error.message);
+        }
+      };
+      
+
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
         const operatorId = user?.id;
@@ -25,6 +45,7 @@ export default function Statistics() {
             try {
                 const postsRes = await fetch(`http://127.0.0.1:8000/api/posts/total/${operatorId}`);
                 const appsRes = await fetch(`http://127.0.0.1:8000/api/applications/posts/operator/${operatorId}`);
+                const apps = await fetch(`http://127.0.0.1:8000/api/posts/all/${operatorId}`);
 
                 if (!postsRes.ok || !appsRes.ok) {
                     throw new Error("Erreur lors du chargement des statistiques.");
@@ -32,11 +53,14 @@ export default function Statistics() {
 
                 const postsData = await postsRes.json();
                 const appsData = await appsRes.json();
+                const app = await apps.json();
+
+                console.log(app.data);
 
                 setStats({
                     totalPosts: parseInt(postsData.number),
                     totalApplications: parseInt(appsData.data),
-                    postsWithApplications: appsData.posts || []
+                    postsWithApplications: app.data || []
                 });
             } catch (err) {
                 setError(err.message);
@@ -102,36 +126,51 @@ export default function Statistics() {
                                 <table className="min-w-full divide-y divide-gray-700">
                                     <thead className="bg-gray-800/50">
                                         <tr>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-blue-300 uppercase tracking-wider">
-                                                Titre de l'Annonce
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-blue-300 uppercase tracking-wider">
-                                                Postulations
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-blue-300 uppercase tracking-wider">
-                                                % du Total
-                                            </th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-blue-300 uppercase tracking-wider">Titre de l'annonce</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-blue-300 uppercase tracking-wider">Nom du candidat</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-blue-300 uppercase tracking-wider">Date de postulation</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-blue-300 uppercase tracking-wider">Statut</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-blue-300 uppercase tracking-wider">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-gray-800/20 divide-y divide-gray-700">
                                         {stats.postsWithApplications.length > 0 ? (
-                                            stats.postsWithApplications.map((post, index) => (
-                                                <tr key={index} className="hover:bg-gray-700/30 transition-colors">
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
-                                                        {post.title}
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                                                        {post.applications}
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                                                        {stats.totalApplications > 0 ? Math.round((post.applications / stats.totalApplications) * 100) : 0}%
-                                                    </td>
-                                                </tr>
-                                            ))
+                                            stats.postsWithApplications.flatMap((post) =>
+                                                post.applications.map((app) => (
+                                                    <tr key={app.id} className="hover:bg-gray-700/30 transition-colors">
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{post.title}</td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{app.user?.name || 'N/A'}</td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                                            {new Date(app.created_at).toLocaleDateString()}
+                                                        </td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                                            <span className={`px-2 py-1 rounded-full text-xs ${app.status === 'accepted'
+                                                                    ? 'bg-green-500/20 text-green-300'
+                                                                    : app.status === 'rejected'
+                                                                        ? 'bg-red-500/20 text-red-300'
+                                                                        : 'bg-yellow-500/20 text-yellow-300'
+                                                                }`}>
+                                                                {app.status}
+                                                            </span>
+                                                        </td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                                            <select
+                                                                value={app.status}
+                                                                onChange={(e) => handleStatusChange(app.id, e.target.value)}
+                                                                className="bg-gray-700 text-white border border-gray-600 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                                            >
+                                                                <option value="in process">En cours</option>
+                                                                <option value="accepted">Accepté</option>
+                                                                <option value="rejected">Rejeté</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            )
                                         ) : (
                                             <tr>
-                                                <td colSpan="3" className="px-6 py-4 text-center text-gray-400">
-                                                    Aucune donnée disponible
+                                                <td colSpan="5" className="px-6 py-4 text-center text-gray-400">
+                                                    Aucune postulation trouvée
                                                 </td>
                                             </tr>
                                         )}
